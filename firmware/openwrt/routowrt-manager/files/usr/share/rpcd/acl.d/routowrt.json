@@ -1,0 +1,7 @@
+{
+  "luci-app-routowrt": {
+    "description": "RoutoWrt authenticated management",
+    "read": {"ubus": {"routowrt": ["capabilities", "status", "traffic", "job_status", "logs"]}},
+    "write": {"ubus": {"routowrt": ["get", "save", "import", "refresh", "apply", "select", "rollback", "service", "export", "check"]}}
+  }
+}
