@@ -17,7 +17,7 @@ define Package/routowrt-core
   SECTION:=net
   CATEGORY:=Network
   TITLE:=RoutoWrt static sing-box evaluation core
-  DEPENDS:=+ca-bundle +kmod-nft-tproxy +ip-tiny
+  DEPENDS:=+ca-bundle +kmod-nft-tproxy +ip-full
 endef
 
 define Package/routowrt-core/description

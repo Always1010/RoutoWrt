@@ -12,7 +12,7 @@ define Package/routowrt-forwarding
   SECTION:=net
   CATEGORY:=Network
   TITLE:=RoutoWrt LAN forwarding adapter
-  DEPENDS:=+routowrt-core +firewall4 +jsonfilter +ip-tiny +ubus
+  DEPENDS:=+routowrt-core +firewall4 +jsonfilter +ip-full +ubus
 endef
 
 define Build/Compile
