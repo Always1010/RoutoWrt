@@ -2,7 +2,7 @@
   "admin/services/routowrt": {
     "title": "RoutoWrt",
     "order": 30,
-    "action": { "type": "view", "path": "routowrt/app" },
+    "action": { "type": "template", "path": "routowrt/app" },
     "depends": { "acl": ["luci-app-routowrt"] }
   }
 }
