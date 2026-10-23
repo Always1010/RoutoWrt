@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "name": "Example: PC manages the router; Linux host still builds",
+  "build": {
+    "executor": "ssh",
+    "ssh_alias": "lab-builder",
+    "task_root": "/path/to/routowrt",
+    "project_workspace": "/path/to/routowrt/workspaces/RoutoWrt",
+    "openwrt_tree": "/path/to/routowrt/openwrt-build/source",
+    "toolchain_root": "/path/to/routowrt/toolchains",
+    "cache_root": "/path/to/routowrt/build-cache",
+    "output_root": "/path/to/routowrt/artifacts"
+  },
+  "router": {
+    "executor": "local",
+    "target": "lab-router",
+    "connect_timeout_seconds": 10
+  },
+  "traffic": {
+    "executor": "local"
+  }
+}
