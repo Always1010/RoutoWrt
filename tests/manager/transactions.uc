@@ -351,4 +351,16 @@ check(entropyFailed && files['/tmp/routowrt/runtime.json']==null && files['/tmp/
 files['/tmp/routowrt/runtime.json']=savedRuntime;modes['/tmp/routowrt/runtime.json']=0600;pathTypes['/tmp/routowrt/runtime.json']='file';owners['/tmp/routowrt/runtime.json']=0;
 lockCount=coreLockAcquisitions;prepareCoreStart();
 check(coreLockAcquisitions==lockCount+1 && files['/tmp/routowrt/core-api.headers']!=null,'an entropy failure releases core.lock for a later valid spawn');
+// Simulate a fresh boot: nft state is gone and recovery must not require flash
+// writes to succeed before protecting LAN forwarding.
+let bootGood=clone(call('get',{}).model);
+for(let failure in ['current','lastgood','service','marker']) {
+ files['/etc/routowrt/previous.json']=sprintf('%J',bootGood);
+ files['/etc/routowrt/applying.json']=sprintf('%J',{previousCurrent:bootGood,previousRevision:bootGood.revision,previousService:{enabled:true}});
+ active=false;forwardingMode='stopped';
+ if(failure=='marker')failUnlink='/etc/routowrt/applying.json';else failWrite='/etc/routowrt/'+failure+'.json.new';
+ let refused=false;try{boot();}catch(e){refused=index(e.message,'STORAGE_ERROR')>=0;}
+ check(refused && !active && forwardingMode=='guarded' && files['/etc/routowrt/applying.json']!=null && files['/tmp/routowrt/runtime.json']!=null,'boot '+failure+' recovery write failure retains a prepared runtime and fail-closed guard');
+}
+check(boot() && !files['/etc/routowrt/applying.json'] && forwardingMode=='guarded','a later writable boot finishes durable recovery while retaining the guard until confirmation');
 printf('PASS %d manager transaction checks\n',checks);
