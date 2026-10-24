@@ -363,4 +363,13 @@ for(let failure in ['current','lastgood','service','marker']) {
  check(refused && !active && forwardingMode=='guarded' && files['/etc/routowrt/applying.json']!=null && files['/tmp/routowrt/runtime.json']!=null,'boot '+failure+' recovery write failure retains a prepared runtime and fail-closed guard');
 }
 check(boot() && !files['/etc/routowrt/applying.json'] && forwardingMode=='guarded','a later writable boot finishes durable recovery while retaining the guard until confirmation');
+active=true;liveConfig=json(files['/tmp/routowrt/runtime.json']);liveChoices={};for(let o in liveConfig.outbounds)if(o.type=='selector')liveChoices[o.tag]=o.default;
+let restoreWaits=0;locked=true;onSleep=function(){restoreWaits++;if(restoreWaits==2)locked=false;};
+started();onSleep=null;
+check(restoreWaits==2 && forwardingMode=='active' && json(files['/tmp/routowrt/state.json']).appliedRevision==bootGood.revision,'boot confirmer retries lock contention and eventually activates the confirmed core');
+boot();locked=true;restoreWaits=0;onSleep=function(){restoreWaits++;};
+let timedRestore=started();onSleep=null;locked=false;
+check(timedRestore===false && restoreWaits==599 && forwardingMode=='guarded' && json(files['/tmp/routowrt/state.json']).restoringRevision==bootGood.revision && json(files['/tmp/routowrt/state.json']).lastError!=null,'boot lock waiting is bounded and preserves a retryable guarded recovery with an explicit error');
+started();
+check(forwardingMode=='active' && json(files['/tmp/routowrt/state.json']).appliedRevision==bootGood.revision,'a later confirmer can finish a previously timed-out boot recovery');
 printf('PASS %d manager transaction checks\n',checks);
