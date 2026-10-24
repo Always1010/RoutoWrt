@@ -10,6 +10,6 @@
     "path": "pgo/xiaomi-4a-mixed-cpu.pprof",
     "sha256": "80dce5019a843a2605319ab9c73925581d254513c9f01251be10a321a1619a40"
   },
-  "crypto_backend": "mipsle-asm-r2",
+  "crypto_backend": "standard-go",
   "compiler_profile": "crypto-inline"
 }
