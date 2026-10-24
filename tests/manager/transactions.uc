@@ -186,7 +186,7 @@ failRename='/etc/routowrt/current.json';call('configure',{expectedRevision:3,mod
 check(call('job_status',{}).job.error.code=='STORAGE_ERROR' && call('get',{}).model.revision==3 && !active,'stopped configure current write failure preserves old choice');
 call('configure',{expectedRevision:3,model:draft});work();r=call('get',{});
 check(call('job_status',{}).job.status=='succeeded' && r.model.revision==4 && r.model.mode=='direct' && !active && !json(files['/etc/routowrt/service.json']).enabled,'stopped configure saves one revision while preserving disabled service');
-check(json(files['/etc/routowrt/lastgood.json']).revision==3 && r.state.appliedRevision==null,'stopped configure does not claim its checked candidate is applied');
+check(json(files['/etc/routowrt/lastgood.json']).revision==3 && r.state.appliedRevision==null && !files['/tmp/routowrt/runtime.json'] && !files['/tmp/routowrt/core-api.headers'],'stopped configure does not retain an unused credential or claim its checked candidate is applied');
 call('service',{action:'start'});work();r=call('get',{});
 check(call('job_status',{}).job.status=='succeeded' && active && r.state.appliedRevision==4 && json(files['/etc/routowrt/lastgood.json']).revision==4,'start applies latest current instead of stale lastgood');
 draft=clone(r.model);draft.mode='global';draft.groups[0].selected='n1';
