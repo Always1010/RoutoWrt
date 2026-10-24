@@ -5,6 +5,7 @@ PKG_VERSION:=1.0.0
 PKG_RELEASE:=13
 PKG_LICENSE:=MIT GPL-3.0-only
 PKGARCH:=all
+PKG_BUILD_DEPENDS:=luci-base/host
 ROUTING_INPUT:=$(TOPDIR)/routowrt-input/routing
 PKG_FILE_DEPENDS:=$(ROUTING_INPUT)/domestic-domain.srs $(ROUTING_INPUT)/domestic-ip.srs $(ROUTING_INPUT)/manifest.json $(ROUTING_INPUT)/LICENSE
 
@@ -30,20 +31,21 @@ define Build/Prepare
 endef
 
 define Build/Compile
+	python3 ./tools/compact-payload.py --source ./files --output $(PKG_BUILD_DIR)/compact-files --jsmin $(STAGING_DIR_HOSTPKG)/bin/jsmin
 endef
 
 define Package/routowrt-manager/install
 	$(INSTALL_DIR) $(1)/usr/share/ucode/routowrt $(1)/usr/share/rpcd/ucode $(1)/usr/share/rpcd/acl.d $(1)/usr/libexec $(1)/etc/init.d $(1)/etc/uci-defaults
 	$(INSTALL_DIR) $(1)/usr/share/routowrt/policies
-	$(INSTALL_DATA) ./files/usr/share/routowrt/policies/*.json $(1)/usr/share/routowrt/policies/
+	$(INSTALL_DATA) $(PKG_BUILD_DIR)/compact-files/usr/share/routowrt/policies/*.json $(1)/usr/share/routowrt/policies/
 	$(INSTALL_DIR) $(1)/usr/share/routowrt/rules
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/routing/* $(1)/usr/share/routowrt/rules/
-	$(INSTALL_DATA) ./files/usr/share/ucode/routowrt/*.uc $(1)/usr/share/ucode/routowrt/
-	$(INSTALL_DATA) ./files/usr/share/rpcd/ucode/routowrt $(1)/usr/share/rpcd/ucode/
-	$(INSTALL_DATA) ./files/usr/share/rpcd/acl.d/routowrt.json $(1)/usr/share/rpcd/acl.d/
-	$(INSTALL_BIN) ./files/usr/libexec/routowrt-* $(1)/usr/libexec/
-	$(INSTALL_BIN) ./files/etc/init.d/routowrt $(1)/etc/init.d/
-	$(INSTALL_BIN) ./files/etc/uci-defaults/95-routowrt-schedule $(1)/etc/uci-defaults/
+	$(INSTALL_DATA) $(PKG_BUILD_DIR)/compact-files/usr/share/ucode/routowrt/*.uc $(1)/usr/share/ucode/routowrt/
+	$(INSTALL_DATA) $(PKG_BUILD_DIR)/compact-files/usr/share/rpcd/ucode/routowrt $(1)/usr/share/rpcd/ucode/
+	$(INSTALL_DATA) $(PKG_BUILD_DIR)/compact-files/usr/share/rpcd/acl.d/routowrt.json $(1)/usr/share/rpcd/acl.d/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/compact-files/usr/libexec/routowrt-* $(1)/usr/libexec/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/compact-files/etc/init.d/routowrt $(1)/etc/init.d/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/compact-files/etc/uci-defaults/95-routowrt-schedule $(1)/etc/uci-defaults/
 endef
 
 $(eval $(call BuildPackage,routowrt-manager))
