@@ -433,4 +433,9 @@ check(!recoveryError.ok && recoveryError.error.details.recoveryRevision===null &
 call('service',{action:'stop'});work();
 check(call('job_status',{}).job.status=='succeeded' && !active,'stop remains executable when current and both recovery copies are corrupt');
 files['/etc/routowrt/current.json']=metadataCurrent;files['/etc/routowrt/lastgood.json']=metadataGood;files['/etc/routowrt/previous.json']=metadataHistory;
+for(let diagnostic in ['/etc/routowrt/subscription-status.json','/tmp/routowrt/state.json','/tmp/routowrt/restore-timeout.json']) {
+ let previousDiagnostic=files[diagnostic];files[diagnostic]='broken';let auxiliaryFailure=call('get',{});
+ check(!auxiliaryFailure.ok && auxiliaryFailure.error.code=='READ_FAILED' && auxiliaryFailure.error.details==null && files['/etc/routowrt/current.json']==metadataCurrent,'corrupt auxiliary '+diagnostic+' does not advertise model recovery or replace valid current');
+ if(previousDiagnostic==null)delete files[diagnostic];else files[diagnostic]=previousDiagnostic;
+}
 printf('PASS %d manager transaction checks\n',checks);
