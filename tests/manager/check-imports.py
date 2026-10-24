@@ -9,7 +9,7 @@ package = root / 'firmware/openwrt/routowrt-manager/files/usr/share'
 ucode = sys.argv[1] if len(sys.argv) == 2 else 'ucode'
 result = subprocess.run(
     [ucode, '-L', str(package / 'ucode'), '-e',
-     "import { call } from 'routowrt.store'; "
+     "import { call, prepareCoreStart } from 'routowrt.store'; "
      "import { sampleTraffic } from 'routowrt.traffic'; "
      "import { sampleStatus } from 'routowrt.status'; "
      "import { selectionPlan } from 'routowrt.selection'; "
