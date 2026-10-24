@@ -399,6 +399,8 @@ def main(argv=None):
         store = readfile('usr/share/ucode/routowrt/store.uc')
         check('manager_boot_requires_enabled_lastgood', b"read(DATA+'/service.json',{enabled:false})" in store and b"read(DATA+'/lastgood.json',null)" in store and b'if(!config.enabled || !good)return false;' in store)
         init = readfile('etc/init.d/routowrt')
+        check('subscription_downloader_header_option', b'header-limits' in readfile('bin/uclient-fetch'))
+        check('subscription_downloader_header_parser', b'uclient_http_set_header_limits' in readfile('usr/lib/libuclient.so'))
         check('manager_init_requires_runtime', b'[ -s /tmp/routowrt/runtime.json ] || /usr/libexec/routowrt-boot || return 0' in init)
         check('manager_boot_service_enabled', any(
             line.startswith('l') and line.endswith('squashfs-root/etc/rc.d/S95routowrt -> ../init.d/routowrt')
