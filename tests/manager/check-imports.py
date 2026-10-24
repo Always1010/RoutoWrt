@@ -11,6 +11,7 @@ result = subprocess.run(
     [ucode, '-L', str(package / 'ucode'), '-e',
      "import { call } from 'routowrt.store'; "
      "import { sampleTraffic } from 'routowrt.traffic'; "
+     "import { sampleStatus } from 'routowrt.status'; "
      "import { selectionPlan } from 'routowrt.selection'; "
      "print('PASS real manager module imports\\n');"],
     env={**os.environ, 'ROUTOWRT_POLICY_DIR': str(package / 'routowrt/policies')},

@@ -1,0 +1,4 @@
+#!/usr/bin/ucode
+'use strict';
+import { sampleStatus } from 'routowrt.status';
+sampleStatus();
