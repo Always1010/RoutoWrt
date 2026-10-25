@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=routowrt-external-manager
 PKG_VERSION:=1.0.0
-PKG_RELEASE:=1
+PKG_RELEASE:=2
 PKG_LICENSE:=MIT GPL-3.0-only
 PKGARCH:=all
 PKG_FILE_DEPENDS:=$(CURDIR)/payload.json $(CURDIR)/../routowrt-external-manager/tools/stage-files.py $(foreach input,$(shell python3 $(CURDIR)/../routowrt-external-manager/tools/stage-files.py --manifest $(CURDIR)/payload.json --list-sources),$(TOPDIR)/package/$(input))
@@ -13,7 +13,7 @@ define Package/routowrt-external-manager
   SECTION:=net
   CATEGORY:=Network
   TITLE:=RoutoWrt optional external manager
-  DEPENDS:=+routowrt-external-forwarding +rpcd-mod-ucode +ucode +ucode-mod-fs +ubus +dnsmasq +busybox +@BUSYBOX_CONFIG_NSLOOKUP +@BUSYBOX_CONFIG_FEATURE_NSLOOKUP_BIG +@BUSYBOX_CONFIG_FEATURE_NSLOOKUP_LONG_OPTIONS +@BUSYBOX_CONFIG_LONG_OPTS
+  DEPENDS:=+routowrt-external-forwarding +rpcd-mod-ucode +ucode +ucode-mod-fs +ubus +dnsmasq +busybox
   CONFLICTS:=routowrt-manager routowrt-forwarding
 endef
 
