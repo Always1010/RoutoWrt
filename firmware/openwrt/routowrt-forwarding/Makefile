@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=routowrt-forwarding
 PKG_VERSION:=1
-PKG_RELEASE:=4
+PKG_RELEASE:=5
 PKG_LICENSE:=MIT
 PKGARCH:=all
 
@@ -13,6 +13,7 @@ define Package/routowrt-forwarding
   CATEGORY:=Network
   TITLE:=RoutoWrt LAN forwarding adapter
   DEPENDS:=+routowrt-core +firewall4 +jsonfilter +ip-full +ubus +ucode +ucode-mod-fs
+  CONFLICTS:=routowrt-external-forwarding routowrt-external-manager
 endef
 
 define Build/Compile

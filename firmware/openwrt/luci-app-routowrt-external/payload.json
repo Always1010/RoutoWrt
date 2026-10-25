@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "package": "luci-app-routowrt-external",
+  "files": [
+    {
+      "source": "luci-app-routowrt/root/usr/share/luci/menu.d/luci-app-routowrt.json",
+      "path": "usr/share/luci/menu.d/luci-app-routowrt.json",
+      "mode": "0644"
+    },
+    {
+      "source": "luci-app-routowrt/ucode/template/routowrt/app.ut",
+      "path": "usr/share/ucode/luci/template/routowrt/app.ut",
+      "mode": "0644"
+    },
+    {
+      "source": "luci-app-routowrt/htdocs/luci-static/resources/routowrt/api.js",
+      "path": "www/luci-static/resources/routowrt/api.js",
+      "mode": "0644"
+    },
+    {
+      "source": "luci-app-routowrt/htdocs/luci-static/resources/routowrt/style.css",
+      "path": "www/luci-static/resources/routowrt/style.css",
+      "mode": "0644"
+    },
+    {
+      "source": "luci-app-routowrt/htdocs/luci-static/resources/view/routowrt/external.js",
+      "path": "www/luci-static/resources/view/routowrt/external.js",
+      "mode": "0644"
+    }
+  ]
+}

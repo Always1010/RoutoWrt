@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=routowrt-manager
 PKG_VERSION:=1.0.0
-PKG_RELEASE:=17
+PKG_RELEASE:=18
 PKG_LICENSE:=MIT GPL-3.0-only
 PKGARCH:=all
 PKG_BUILD_DEPENDS:=luci-base/host
@@ -19,6 +19,7 @@ define Package/routowrt-manager
   TITLE:=RoutoWrt transactional configuration manager
   DEPENDS:=+routowrt-core +routowrt-forwarding +rpcd-mod-ucode +ucode +ucode-mod-fs +ucode-mod-digest +uclient-fetch +ca-bundle +dnsmasq
   EXTRA_DEPENDS:=uclient-fetch (>=2026.06.07~daad21fa-r4), libuclient (>=2026.06.07~daad21fa-r4)
+  CONFLICTS:=routowrt-external-manager routowrt-external-forwarding
 endef
 
 define Package/routowrt-manager/conffiles

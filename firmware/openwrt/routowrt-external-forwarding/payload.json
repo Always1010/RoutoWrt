@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "package": "routowrt-external-forwarding",
+  "files": [
+    {
+      "source": "routowrt-forwarding/files/routowrt-external-forwarding",
+      "path": "usr/libexec/routowrt-external-forwarding",
+      "mode": "0755"
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "package": "routowrt-external-manager",
+  "files": [
+    {
+      "source": "routowrt-external-manager/files/etc/init.d/routowrt",
+      "path": "etc/init.d/routowrt",
+      "mode": "0755"
+    },
+    {
+      "source": "routowrt-manager/files/etc/init.d/routowrt-external-dns",
+      "path": "etc/init.d/routowrt-external-dns",
+      "mode": "0755"
+    },
+    {
+      "source": "routowrt-external-manager/files/etc/uci-defaults/95-routowrt-external",
+      "path": "etc/uci-defaults/95-routowrt-external",
+      "mode": "0755"
+    },
+    {
+      "source": "routowrt-manager/files/usr/libexec/routowrt-external",
+      "path": "usr/libexec/routowrt-external",
+      "mode": "0755"
+    },
+    {
+      "source": "routowrt-manager/files/usr/libexec/routowrt-job",
+      "path": "usr/libexec/routowrt-job",
+      "mode": "0755"
+    },
+    {
+      "source": "routowrt-manager/files/usr/libexec/routowrt-storage-init",
+      "path": "usr/libexec/routowrt-storage-init",
+      "mode": "0755"
+    },
+    {
+      "source": "routowrt-manager/files/usr/libexec/routowrt-timeout",
+      "path": "usr/libexec/routowrt-timeout",
+      "mode": "0755"
+    },
+    {
+      "source": "routowrt-external-manager/files/usr/share/rpcd/acl.d/routowrt.json",
+      "path": "usr/share/rpcd/acl.d/routowrt.json",
+      "mode": "0644"
+    },
+    {
+      "source": "routowrt-external-manager/files/usr/share/rpcd/ucode/routowrt",
+      "path": "usr/share/rpcd/ucode/routowrt",
+      "mode": "0644"
+    },
+    {
+      "source": "routowrt-manager/files/usr/share/ucode/routowrt/external-controller.uc",
+      "path": "usr/share/ucode/routowrt/external-controller.uc",
+      "mode": "0644"
+    },
+    {
+      "source": "routowrt-manager/files/usr/share/ucode/routowrt/external-model.uc",
+      "path": "usr/share/ucode/routowrt/external-model.uc",
+      "mode": "0644"
+    },
+    {
+      "source": "routowrt-manager/files/usr/share/ucode/routowrt/external.uc",
+      "path": "usr/share/ucode/routowrt/external.uc",
+      "mode": "0644"
+    },
+    {
+      "source": "routowrt-manager/files/usr/share/ucode/routowrt/job-worker.uc",
+      "path": "usr/share/ucode/routowrt/job-worker.uc",
+      "mode": "0644"
+    },
+    {
+      "source": "routowrt-external-manager/files/usr/share/ucode/routowrt/store.uc",
+      "path": "usr/share/ucode/routowrt/store.uc",
+      "mode": "0644"
+    }
+  ]
+}

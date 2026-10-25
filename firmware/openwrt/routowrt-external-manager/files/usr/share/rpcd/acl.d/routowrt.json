@@ -1,0 +1,7 @@
+{
+  "luci-app-routowrt": {
+    "description": "RoutoWrt authenticated external management",
+    "read": {"ubus": {"routowrt": ["capabilities", "job_status", "external_status"]}},
+    "write": {"ubus": {"routowrt": ["external_get", "external_save", "external_apply", "external_disable"]}}
+  }
+}
