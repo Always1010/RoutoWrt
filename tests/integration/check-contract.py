@@ -33,7 +33,7 @@ read = set(grant["read"]["ubus"]["routowrt"])
 write = set(grant["write"]["ubus"]["routowrt"])
 backend_methods = {"external_get", "external_status", "external_save", "external_apply", "external_disable"}
 assert backend_methods <= rpc_methods, "external backend RPC methods are missing"
-assert ui_methods == rpc_methods - backend_methods, f"UI/RPC methods differ: {ui_methods ^ (rpc_methods - backend_methods)}"
+assert ui_methods == rpc_methods, f"UI/RPC methods differ: {ui_methods ^ rpc_methods}"
 check_params = ["nodeId", "subscriptionId", "nodeIds", "scope", "retryFailed"]
 ui_check = re.search(r"\bcheck\s*:\s*\[([^]]*)\]", definitions).group(1)
 rpc_check = re.search(r"\bcheck\s*:\s*\{([^}]*)\}", mapping).group(1)
@@ -48,4 +48,6 @@ for permission in ("read", "write"):
     assert "*" not in grant[permission]["ubus"]["routowrt"], "wildcard RPC permission"
 assert menu["admin/services/routowrt"]["action"]["path"] == "routowrt/app"
 assert (ui / "htdocs/luci-static/resources/view/routowrt/app.js").is_file()
+assert (ui / "htdocs/luci-static/resources/view/routowrt/external.js").is_file()
+assert "view: 'routowrt/external'" in (ui / "ucode/template/routowrt/app.ut").read_text(encoding="utf-8")
 print(f"PASS {len(rpc_methods)} UI/RPC methods, private credential actions, minimal ACL and menu binding")
