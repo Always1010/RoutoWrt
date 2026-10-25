@@ -71,6 +71,21 @@
       "source": "routowrt-external-manager/files/usr/share/ucode/routowrt/store.uc",
       "path": "usr/share/ucode/routowrt/store.uc",
       "mode": "0644"
+    },
+    {
+      "source": "routowrt-manager/files/usr/share/ucode/routowrt/external-boot.uc",
+      "path": "usr/share/ucode/routowrt/external-boot.uc",
+      "mode": "0644"
+    },
+    {
+      "source": "routowrt-external-manager/files/usr/libexec/routowrt-external-supervisor",
+      "path": "usr/libexec/routowrt-external-supervisor",
+      "mode": "0755"
+    },
+    {
+      "source": "routowrt-external-manager/files/usr/share/nftables.d/ruleset-pre/30-routowrt-external.nft",
+      "path": "usr/share/nftables.d/ruleset-pre/30-routowrt-external.nft",
+      "mode": "0644"
     }
   ]
 }

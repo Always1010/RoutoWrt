@@ -25,7 +25,7 @@ storage = (ROOT / 'firmware/openwrt/routowrt-manager/files/usr/libexec/routowrt-
 storage = '\n'.join(line for line in storage.splitlines() if not line.startswith(('#!', 'import ')) and line != 'prepareExternalStorage();')
 suites.append((ROOT / 'tests/manager/external-storage.uc').read_text(encoding='utf-8').replace('// EXTERNAL_STORAGE_SOURCE', storage))
 suites.append((ROOT / 'tests/manager/external-runtime.uc').read_text(encoding='utf-8').replace(
-    '// EXTERNAL_RUNTIME_SOURCE', bundle(['external-model.uc', 'external-controller.uc', 'external.uc'])))
+    '// EXTERNAL_RUNTIME_SOURCE', bundle(['external-model.uc', 'external-boot.uc', 'external-controller.uc', 'external.uc'])))
 dispatcher = ROOT / 'firmware/openwrt/routowrt-external-manager/files/usr/share/ucode/routowrt/store.uc'
 if dispatcher.is_file():
     source = '\n'.join(line for line in dispatcher.read_text(encoding='utf-8').splitlines() if not line.startswith('import ')).replace('export function ', 'function ')

@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=routowrt-external-manager
 PKG_VERSION:=1.0.0
-PKG_RELEASE:=5
+PKG_RELEASE:=6
 PKG_LICENSE:=MIT GPL-3.0-only
 PKGARCH:=all
 PKG_FILE_DEPENDS:=$(CURDIR)/payload.json $(CURDIR)/../routowrt-external-manager/tools/stage-files.py $(foreach input,$(shell python3 $(CURDIR)/../routowrt-external-manager/tools/stage-files.py --manifest $(CURDIR)/payload.json --list-sources),$(TOPDIR)/package/$(input))
